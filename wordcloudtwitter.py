@@ -3,19 +3,18 @@ import matplotlib.pyplot as plt
 import re
 from PIL import Image
 from persian_wordcloud.wordcloud import PersianWordCloud
-from IPython.display import Image as im
-import twitterscraper 
 import json
 
 
 def clean_tweets(raw_list):
-	raw_string = ''.join(raw_tweets)
+	raw_string = ' '.join(raw_list)
 	no_links = re.sub(r'http\S+', '', raw_string)
+	no_links = re.sub(r'\S+.com', '', no_links)
 	return no_links
 
 def create_words(clean_string):
 	words = clean_string.split(" ")
-	words = [w for w in words if len(w) > 2]  # ignore a, to, at...
+	words = [w for w in words if len(w) > 3]  # ignore a, to, at...
 	return words
 
 #Collect the data from the user timeline
